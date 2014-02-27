@@ -1,0 +1,27 @@
+{
+  "name": "ecard-server",
+  "version": "0.0.1",
+  "description": "A server to create and update virtual cards",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://git@github.com:azoff/ecard-server.git"
+  },
+  "keywords": [
+    "ecard",
+    "passbook",
+    "qr"
+  ],
+  "author": "Jonathan Azoff",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/azoff/ecard-server/issues"
+  },
+  "homepage": "https://github.com/azoff/ecard-server",
+  "dependencies": {
+    "express": "~3.4.8"
+  }
+}
