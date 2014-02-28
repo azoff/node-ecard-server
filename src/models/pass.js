@@ -1,3 +1,11 @@
-module.exports = {
-	serialNumber: { type: String, index: true }
+exports.defineAs = function(db, table) {
+
+	"use strict";
+
+	var Pass = db.define(table, {
+		serialNumber: { type: String, index: true }
+	});
+
+	return Pass;
+
 };

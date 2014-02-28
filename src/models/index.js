@@ -1,6 +1,8 @@
 var CaminteDB = require('caminte').Schema;
-var db = new CaminteDB('sqlite3', { database: ':memory:' });
+var db = new CaminteDB('sqlite3', { database: ':memory:' }); //TODO: add Data dir
 
-db.define('Pass', require('./pass'));
+require('./pass').defineAs(db, 'Pass');
 
-module.exports = db;
+db.automigrate();
+
+module.exports = db.models;
