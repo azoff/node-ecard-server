@@ -1,6 +1,7 @@
 var express    = require('express');
 var routes     = require('./routes');
 var middleware = require('./middleware');
+var models     = require('./models');
 
 module.exports.start = function(port) {
 
