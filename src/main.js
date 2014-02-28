@@ -1,0 +1,1 @@
+require('./app').start(process.env.PORT || 8080);
