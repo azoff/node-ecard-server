@@ -2,7 +2,7 @@
   "name": "ecard-server",
   "version": "0.0.1",
   "description": "A server to create and update virtual cards",
-  "main": "src/main.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "test/test.js"
   },

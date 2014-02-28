@@ -1,3 +1,6 @@
+"use strict";
+
+var app     = require('../app');
 var path    = require('path');
 var async   = require('async');
 var utils   = require('../utils');
@@ -7,9 +10,7 @@ var newPass = require('passbook');
 
 var cache = {};
 
-module.exports = function(req, res) {
-
-	"use strict";
+app.post('/passbook/:org_slug/render', function(req, res) {
 
 	var name = req.params.pass_name;
 
@@ -61,4 +62,4 @@ module.exports = function(req, res) {
 		if (err) res.json(500, { error: err.message });
 	}
 
-};
+});

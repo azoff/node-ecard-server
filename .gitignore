@@ -4,3 +4,4 @@ node_modules/
 mock.in.json
 mock.out*
 npm-debug.log
+db.sqlite3

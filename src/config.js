@@ -1,7 +1,9 @@
 var path = require('path');
 
-exports.BASE_DIR         = path.dirname(__dirname);
-exports.HOME_DIR         = path.dirname(exports.BASE_DIR);
+exports.BASE_DIR = path.dirname(__dirname);
+exports.HOME_DIR = path.dirname(exports.BASE_DIR);
+
+exports.DB_PATH = path.join(exports.BASE_DIR, 'db.sqlite3');
 
 // Passbook Settings
 exports.PASS_TYPE_PREFIX = 'pass.com.azoffdesign.';
