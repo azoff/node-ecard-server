@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://git@github.com:azoff/ecard-server.git"
+    "url": "git://git@github.com:azoff/node-ecard-server.git"
   },
   "keywords": [
     "ecard",
@@ -18,9 +18,9 @@
   "author": "Jonathan Azoff",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/azoff/ecard-server/issues"
+    "url": "https://github.com/azoff/node-ecard-server/issues"
   },
-  "homepage": "https://github.com/azoff/ecard-server",
+  "homepage": "https://github.com/azoff/node-ecard-server",
   "dependencies": {
     "express": "~3.4.8",
     "passbook": "~2.0.1",
