@@ -10,9 +10,10 @@ var newPass = require('passbook');
 
 var cache = {};
 
-app.post('/passbook/:org_slug/render', function(req, res) {
+app.post('/passbook/:org_slug/:member_number', function(req, res) {
 
-	var name = req.params.pass_name;
+	res.json(200, { 'org': req.org.id, 'member': req.member.id });
+	return;
 
 	async.waterfall([
 		getTemplate,

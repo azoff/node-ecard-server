@@ -6,7 +6,7 @@ exports.HOME_DIR = path.dirname(exports.BASE_DIR);
 exports.DB_PATH = path.join(exports.BASE_DIR, 'db.sqlite3');
 
 // Passbook Settings
-exports.PASS_TYPE_PREFIX = 'pass.com.azoffdesign.';
+exports.PKID_FORMAT      = 'pass.com.azoffdesign.%s-card';
 exports.IOS_TEAM_ID      = 'LYS5QV8874';
 exports.IOS_CERT_PASS    = process.env.IOS_CERT_PASS || 'ecard';
 exports.IOS_DIR          = process.env.IOS_DIR || path.join(exports.HOME_DIR, 'ios');

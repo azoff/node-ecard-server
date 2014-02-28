@@ -1,9 +1,8 @@
+"use strict";
+
 var express = require('express');
+var app     = require('../app');
 
-exports.apply = function(app) {
-
-	"use strict";
-
+app.configure('development', function(){
 	app.use(express.logger());
-
-};
+});

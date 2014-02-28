@@ -1,12 +1,5 @@
-var async       = require('async');
-var express     = require('express');
-var development = require('./development');
+var express  = require('express');
+var app     = require('../app');
 
-exports.apply = function(app) {
-
-	"use strict";
-
-	app.configure('development', async.apply(development.apply, app));
-	app.use(express.json());
-
-};
+app.use(express.json());
+require('./development');

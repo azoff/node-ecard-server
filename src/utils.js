@@ -21,3 +21,11 @@ exports.toArray = function (obj) {
 	});
 	return arr;
 };
+
+exports.serveError = function(err, res, code, msg) {
+	code = code || 418;
+	msg  = msg || "I\'m A Teapot";
+	var number = Math.random().toString().substr(2);
+	console.error("ERROR("+number+"):", err.stack);
+	res.json(code, { error: msg + '. Ref #' + number });
+};
