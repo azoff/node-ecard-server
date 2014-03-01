@@ -10,42 +10,54 @@ var newPass = require('passbook');
 
 var cache = {};
 
-app.post('/passbook/:org_slug/:member_number', function(req, res) {
+app.get('/passbook/:org_slug/:member_number', function(req, res) {
 
-	res.json(200, { 'org': req.org.id, 'member': req.member.id });
-	return;
+	var cardname = req.params.org_slug + '-card';
 
 	async.waterfall([
 		getTemplate,
+		getFieldSources,
 		getFields,
 		renderPass
 	], onError);
 
 	function getTemplate(callback) {
-		if (name in cache) {
-			callback(null, cache[name]);
+		if (cardname in cache) {
+			callback(null, cache[cardname]);
 		} else {
-			var template = path.join(config.IOS_TEMPLATE_DIR, name);
+			var template = path.join(config.IOS_TEMPLATE_DIR, cardname + '.json');
 			async.waterfall([
-				async.apply(utils.readJsonFile, template + '.json'),
+				async.apply(utils.readJsonFile, template),
 				createTemplate
 			], callback);
 		}
 	}
 
 	function createTemplate(template, callback) {
-		var type   = config.PASS_TYPE_PREFIX + name;
-		var imagedir = path.join(config.IOS_IMAGE_DIR, name);
+		var type   = config.PASS_TYPE_PREFIX + cardname;
+		var imagedir = path.join(config.IOS_IMAGE_DIR, cardname);
 		template.passTypeIdentifier = type;
 		template.teamIdentifier     = config.IOS_TEAM_ID;
 		template = newPass(template.style, template);
 		template.keys(config.IOS_CERTS_DIR, config.IOS_CERT_PASS);
 		template.loadImagesFrom(imagedir);
-		callback(null, cache[name] = template);
+		callback(null, cache[cardname] = template);
 	}
 
-	function getFields(template, callback) {
-		var fields  = extend(true, {}, template.fields, req.body);
+	function getFieldSources(template, callback) {
+		async.parallel({
+			org: async.apply(req.org.pkFields.bind(req.org), template.style),
+			member: async.apply(req.member.pkFields.bind(req.member), template.style),
+			promo: async.apply(req.org.currentPromoPkFields.bind(req.org), template.style)
+		}, function(err, sources) {
+			if (err) { callback(err); return; }
+			sources.template = template.fields;
+			callback(null, template, sources);
+		});
+	}
+
+	function getFields(template, sources, callback) {
+		var fields  = extend(true, {}, sources.template, sources.org, sources.promo, sources.member);
 		var convert = ['primary', 'secondary', 'auxiliary', 'back'];
 		convert.forEach(function(name){
 			name += 'Fields';
